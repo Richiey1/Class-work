@@ -6,7 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 const primaryContractAddress = "0xDb487631767361A0abe6Cc235824d08279B09F16";
-const messageContractAddress = "0x32871De03345ECfba742e1BC163E66C2903F7640";
 
 function App() {
   const [provider, setProvider] = useState(null);
@@ -31,16 +30,11 @@ function App() {
             abi,
             _signer
           );
-          const _messageContract = new ethers.Contract(
-            messageContractAddress,
-            abi,
-            _signer
-          );
+          
 
           setProvider(_provider);
           setSigner(_signer);
           setPrimaryContract(_primaryContract);
-          setMessageContract(_messageContract);
           toast.success("MetaMask connected successfully!");
         } catch (error) {
           toast.error("Failed to connect to MetaMask.");
@@ -54,17 +48,22 @@ function App() {
   }, []);
 
   const getBalance = async () => {
-    if (primaryContract) {
+    if (provider) {
       try {
-        const _balance = await primaryContract.getBalance();
+        const _balance = await provider.getBalance(primaryContractAddress);
         setBalance(ethers.formatEther(_balance));
         toast.success(`Balance fetched successfully: ${ethers.formatEther(_balance)} ETH`);
+        console.log("Balance fetched:", ethers.formatEther(_balance));
       } catch (error) {
-        console.error(error);
+        console.error("Failed to fetch balance:", error);
         toast.error("Failed to fetch balance.");
       }
+    } else {
+      toast.error("Provider not initialized.");
     }
   };
+  
+  
 
   const deposit = async () => {
     if (primaryContract && amount) {
