@@ -131,20 +131,15 @@ function App() {
 
   return (
     <div className="App">
-      <h1>DApp Functions</h1>
+      <h1>DApp Classwork</h1>
 
       <div className="contract-section">
         <button onClick={getBalance}>Get Balance</button>
         <p>Contract Balance: {balance} ETH</p>
 
-        <input
-          type="number"
-          placeholder="Enter amount in ETH"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <button onClick={deposit}>Deposit</button>
-        <button onClick={withdraw}>Withdraw</button>
+        <input type="number" placeholder="Enter amount in ETH" value={amount} onChange={(e) => setAmount(e.target.value)} />
+        <button className="deposit-button" onClick={deposit}>Deposit</button>
+        <button className="withdraw-button" onClick={withdraw}>Withdraw</button>
       </div>
 
       <ToastContainer />

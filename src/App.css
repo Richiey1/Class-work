@@ -1,92 +1,201 @@
-/* General Reset */
-body {
+:root {
+  --primary-color-light: #932929;
+  --primary-color-dark: #059669;
+  --primary-hover-light: #059669;
+  --primary-hover-dark: #932929;
+  --error-color: #FFFFFF;
+  --success-color: #FFFFFF;
+  --background-color: #F3F4F6;
+  --card-background: #FFFFFF;
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --border-color: #E5E7EB;
+  --input-background: #F9FAFB;
+}
+
+* {
   margin: 0;
   padding: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f6f8;
-  color: #333;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
+  box-sizing: border-box;
 }
 
-/* App Container */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--background-color);
+  min-height: 100vh;
+  line-height: 1.5;
+  color: var(--text-primary);
+  flex-direction: column;
+}
+
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
   padding: 20px;
-  border-radius: 10px;
-  background: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 400px;
-  max-width: 90%;
 }
 
-/* Heading */
-h1 {
-  font-size: 1.8rem;
-  color: #444;
-  margin-bottom: 20px;
+.App h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 32px;
+  text-align: center;
 }
 
-/* Input Field */
-input[type="text"], input[type="number"] {
+/* Contract */
+.contract-section {
+  background-color: var(--card-background);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 24px;
   width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 1rem;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-/* Buttons */
-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  margin: 5px;
-  border-radius: 5px;
+/* Balance */
+.contract-section p {
+  text-align: center;
+  font-size: 18px;
+  color: var(--text-primary);
+  background-color: var(--input-background);
+  padding: 16px;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+/* Input */
+.contract-section input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: var(--input-background);
+  transition: all 0.2s ease;
+}
+
+.contract-section input:focus {
+  outline: none;
+  border-color: var(--primary-color-dark);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+}
+
+.contract-section input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Button */
+.contract-section .deposit-button {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+  transition: all 0.2s ease;
+  border: none;
+  background-color: var(--primary-color-dark);
+  color: white;
 }
 
-button:hover {
-  background-color: #0056b3;
+.contract-section .deposit-button:hover {
+  background-color: var(--primary-hover-light);
+  transform: translateY(-1px);
 }
 
-button:active {
-  background-color: #003f7f;
+.contract-section .deposit-button:active {
+  transform: translateY(0);
 }
 
-/* Retrieved Message Display */
-p {
-  font-size: 1.2rem;
-  color: #555;
-  margin-top: 15px;
+.contract-section .withdraw-button {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  background-color: var(--primary-color-light);
+  color: white;
+} 
+
+.contract-section .withdraw-button:hover {
+  background-color: var(--primary-hover-dark);
+  transform: translateY(-1px);
 }
 
-/* Toast Notification */
+/* Balance Button */
+.contract-section button:first-of-type {
+  background-color: transparent;
+  border: 1px solid var(--primary-color-dark);
+  color: var(--primary-color);
+}
+
+.contract-section button:first-of-type:hover {
+  background-color: rgba(79, 70, 229, 0.1);
+}
+
+/* Toast Container */
+.Toastify__toast-container {
+  padding: 16px;
+}
+
 .Toastify__toast {
-  font-family: 'Arial', sans-serif;
-  font-size: 0.9rem;
+  border-radius: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.Toastify__toast--success {
+  background-color: var(--success-color);
+}
+
+.Toastify__toast--error {
+  background-color: var(--error-color);
+}
+
+/* Loading */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
 }
 
 /* Responsive Design */
-@media (max-width: 600px) {
-  .App {
-    width: 95%;
-    padding: 15px;
+@media (max-width: 480px) {
+  .App h1 {
+    font-size: 24px;
   }
 
-  h1 {
-    font-size: 1.5rem;
+  .contract-section {
+    padding: 16px;
   }
 
-  button {
-    font-size: 0.9rem;
-    padding: 8px 10px;
+  .contract-section button {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .contract-section input {
+    font-size: 14px;
   }
 }
