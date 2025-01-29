@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import abi from "../abi.json";
@@ -11,11 +12,8 @@ function App() {
   const [provider, setProvider] = useState(null);
   const [signer, setSigner] = useState(null);
   const [primaryContract, setPrimaryContract] = useState(null);
-  const [messageContract, setMessageContract] = useState(null);
   const [balance, setBalance] = useState("0");
   const [amount, setAmount] = useState("");
-  const [userInput, setUserInput] = useState("");
-  const [retrievedMessage, setRetrievedMessage] = useState("");
 
   useEffect(() => {
     const initializeEthers = async () => {
@@ -103,45 +101,17 @@ function App() {
     }
   };
 
-  const setUserMessage = async () => {
-    if (messageContract) {
-      try {
-        const tx = await messageContract.setMessage(userInput);
-        await tx.wait();
-        toast.success("Message set successfully!");
-      } catch (error) {
-        console.error("Failed to set message:", error);
-        toast.error("Failed to set message.");
-      }
-    }
-  };
-
-  const getUserMessage = async () => {
-    if (messageContract) {
-      try {
-        const message = await messageContract.getMessage();
-        setRetrievedMessage(message);
-        toast.success("Message retrieved successfully!");
-      } catch (error) {
-        console.error("Failed to retrieve message:", error);
-        toast.error("Failed to retrieve message.");
-      }
-    }
-  };
 
   return (
     <div className="App">
       <h1>DApp Classwork</h1>
-
       <div className="contract-section">
         <button onClick={getBalance}>Get Balance</button>
         <p>Contract Balance: {balance} ETH</p>
-
         <input type="number" placeholder="Enter amount in ETH" value={amount}  onChange={(e) => setAmount(e.target.value)} />
         <button className="deposit-button" onClick={deposit}>Deposit</button>
         <button className="withdraw-button" onClick={withdraw}>Withdraw</button>
       </div>
-
       <ToastContainer />
     </div>
   );
