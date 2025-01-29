@@ -137,7 +137,7 @@ function App() {
         <button onClick={getBalance}>Get Balance</button>
         <p>Contract Balance: {balance} ETH</p>
 
-        <input type="number" placeholder="Enter amount in ETH" value={amount} onChange={(e) => setAmount(e.target.value)} />
+        <input type="number" placeholder="Enter amount in ETH" value={amount}  onChange={(e) => setAmount(e.target.value)} />
         <button className="deposit-button" onClick={deposit}>Deposit</button>
         <button className="withdraw-button" onClick={withdraw}>Withdraw</button>
       </div>
